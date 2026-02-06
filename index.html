@@ -1,100 +1,138 @@
 <!doctype html>
-<html lang='en'>
-<head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Portfolio | Oleksandr Agapov</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body class="dark-mode">
-<!-- Вступний екран з портретом та цитатою -->
-<div id="intro-overlay">
-    <div class="intro-content">
-        <h1>Oleksandr Agapov</h1>
-        <p>Front-End Candidate for EPAM Campus</p>
-        <p class="quote">"Persistence is the most important algorithm."</p>
-        <button id="start-btn">View Portfolio</button>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oleksandr Agapov | The Choice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Montserrat:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="intro-cinematic">
+      <div class="neo-wrapper">
+        <div class="pixel-neo-hd"></div>
+        <div class="bullet-ripple"></div>
+      </div>
+
+      <div class="terminal-container">
+        <div id="typed-text"></div>
+        <span class="cursor">_</span>
+      </div>
+
+      <div id="choice-container">
+        <button class="pill blue-pill" id="btn-blue">BLUE PILL</button>
+        <button class="pill red-pill" id="btn-red">RED PILL</button>
+      </div>
+
+      <div class="scanline"></div>
     </div>
-</div>
-<!-- Перемикач світла/темноти -->
-<button id="theme-toggle">Light mode</button>
 
-<!-- Основний контент портфоліо -->
-<div class="container">
-    <!-- Заголовок з фото -->
-    <header>
-        <h1>Oleksandr Agapov</h1>
-        <p class="subtitle">Software Engineering Student | Future Front-End Developer</p>
-        <img src="./IMG_3295_fixed.jpg" alt="Oleksandr's Photo">
-    </header>
+    <canvas id="bg-canvas"></canvas>
 
-    <!-- Основна інформація -->
-    <section>
-        <h2>About Me</h2>
-        <ul>
-            <li><strong>Education:</strong> Taras Shevchenko National University (KNU)</li>
-            <li><strong>Major:</strong> Software Engineering (1st Year)</li>
-            <li><strong>Interests:</strong> UI/UX, Web Logic, Agile Methodologies</li>
-        </ul>
-    </section>
+    <button
+      id="terminal-toggle"
+      title="Open Terminal"
+      aria-label="Open Terminal"
+    >
+      _>
+    </button>
 
-    <!-- Таблиця навичок з позначками рівнів -->
-    <section>
-        <h2>Technical Skills</h2>
-        <table>
-            <thead>
-                <tr><th>Technology</th><th>Level</th></tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Web Foundations (HTML5, CSS3)</td>
-                    <td><span class="skill-label label-learning">Active Learning</span></td>
-                </tr>
-                <tr>
-                    <td>Programming Logic (C++, C#)</td>
-                    <td><span class="skill-label label-academic">Academic Core</span></td>
-                </tr>
-                <tr>
-                    <td>Computational Logic & Thinking</td>
-                    <td><span class="skill-label label-foundational">Foundational Understanding</span></td>
-                </tr>
-                <tr>
-                    <td>Software Engineering Principles (SDLC, Agile)</td>
-                    <td><span class="skill-label label-intro">Introductory Awareness</span></td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-    <!-- Мякі навички та підхід до розробки -->
-    <section class="mt-30">
-        <h2>Engineering Values & Soft Skills</h2>
-        <div style="line-height: 1.6;">
-            <p><strong>• Soft Skills:</strong> I focus on <strong>empathy</strong> in communication, which helps me understand user needs and work effectively in a team environment.</p>
-            <p><strong>• Engineering Approach:</strong> I am interested in not just "coding", but in the <strong>Software Engineering</strong> process. I am familiar with basic life cycles of software development and value clean, maintainable logic.</p>
+    <div id="terminal-modal">
+      <div class="terminal-header">
+        <span>BASH -- user@agapov-portfolio</span>
+        <button id="close-terminal" aria-label="Close Terminal">[x]</button>
+      </div>
+      <div class="terminal-body" id="term-output">
+        <div style="margin-bottom: 10px">
+          Type 'help' to see available commands.
         </div>
-    </section>
-
-    <!-- Контактна форма - відправляється через Formspree -->
-    <div class="contacts-box">
-        <h2>Contact Me</h2>
-        <form action="https://formspree.io/f/mykjanbl" method="POST" id="contact-form">
-            <label for="user-email">Your Email:</label>
-            <input type="email" id="user-email" name="email" required placeholder="example@gmail.com">
-
-            <label for="user-text">Message:</label>
-            <textarea id="user-text" name="message" required placeholder="Write your message here..."></textarea>
-
-            <button type="submit" id="submit-btn">Send Message</button>
-        </form>
+      </div>
+      <div style="padding: 0 15px 15px 15px">
+        <div class="command-line">
+          <span class="prompt">user$</span>
+          <input type="text" id="term-input" autocomplete="off" />
+        </div>
+      </div>
     </div>
 
-    <footer>
-        <p>Created by Oleksandr Agapov for EPAM Campus • 2026</p>
-    </footer>
-</div>
+    <div class="container">
+      <header class="glass-card visible">
+        <img
+          src="IMG_3295_fixed.jpg"
+          alt="Avatar"
+          class="avatar-img"
+          onerror="
+            this.src = 'https://ui-avatars.com/api/?name=OA&background=0aff5d'
+          "
+        />
+        <h1>Oleksandr Agapov</h1>
+        <p class="subtitle">Front-End Candidate @ EPAM Campus</p>
+      </header>
 
-<script src="script.js"></script>
+      <section class="glass-card visible">
+        <h2><span style="color: #fff">async function</span> getProjects()</h2>
+        <p class="comment-text">// Fetching data from simulated API...</p>
+        <div id="projects-container" class="projects-grid">
+          <div class="loader"></div>
+        </div>
+        <button
+          id="refresh-btn"
+          class="cta-btn"
+          style="margin-top: 20px; width: 100%"
+        >
+          Refresh Data
+        </button>
+      </section>
 
-</body>
+      <section class="glass-card visible">
+        <h2>Skills_Stack</h2>
+        <ul style="list-style: none; line-height: 1.8">
+          <li>
+            <span class="highlight">const</span> languages = ['HTML5', 'CSS3',
+            'JavaScript', 'C++', 'C#'];
+          </li>
+          <li>
+            <span class="highlight">const</span> tools = ['VS Code', 'Git',
+            'Figma'];
+          </li>
+          <li>
+            <span class="highlight">let</span> currentFocus = 'React & Advanced
+            JS';
+          </li>
+        </ul>
+      </section>
+
+      <section class="glass-card visible">
+        <h2>Contact_Me</h2>
+        <form action="https://formspree.io/f/mykjanbl" method="POST">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter email..."
+            required
+            class="input-field"
+          />
+          <textarea
+            name="message"
+            placeholder="System.out.println('Hello')..."
+            required
+            class="input-field textarea-field"
+          ></textarea>
+          <button
+            type="submit"
+            class="cta-btn"
+            style="width: 100%; margin-top: 10px"
+          >
+            Send Message
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
